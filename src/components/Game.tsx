@@ -4,9 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { PRESET_BOARDS, itemsAt, tiersOf } from "@/lib/boards";
 import { isComplete, spent, togglePick } from "@/lib/rules";
 import { DEFAULT_SETTINGS, TEAM_SIZE, type Board, type Item, type Settings } from "@/lib/types";
-import { gradeTeam } from "@/lib/api-client";
+import { gradeTeam, judgeTeams } from "@/lib/api-client";
 import CreditsModal from "./CreditsModal";
 import GradeModal, { type GradeState } from "./GradeModal";
+import JudgeModal, { type JudgeState } from "./JudgeModal";
 import ItemImage from "./ItemImage";
 import MakeBoardModal from "./MakeBoardModal";
 import SettingsModal from "./SettingsModal";
@@ -25,6 +26,10 @@ export default function Game() {
   const [grade, setGrade] = useState<{ key: string; state: GradeState } | null>(null);
   const [gradeOpen, setGradeOpen] = useState(false);
   const [creditsOpen, setCreditsOpen] = useState(false);
+  const [team1, setTeam1] = useState<Item[] | null>(null);
+  const [handoff, setHandoff] = useState(false);
+  const [judge, setJudge] = useState<{ team2: Item[]; state: JudgeState } | null>(null);
+  const judgeAbort = useRef<AbortController | null>(null);
   const noticeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const gradeAbort = useRef<AbortController | null>(null);
 
@@ -32,6 +37,7 @@ export default function Game() {
     () => () => {
       clearTimeout(noticeTimer.current);
       gradeAbort.current?.abort();
+      judgeAbort.current?.abort();
     },
     [],
   );
@@ -69,6 +75,37 @@ export default function Game() {
   }, [complete, settings.players, settings.autoGrade, teamKey, runGrade]);
 
   const closeGrade = useCallback(() => setGradeOpen(false), []);
+
+  const twoPlayer = settings.players === 2;
+  const turn: 1 | 2 = twoPlayer && team1 ? 2 : 1;
+
+  const resetRound = () => {
+    judgeAbort.current?.abort();
+    setPicks([]);
+    setTeam1(null);
+    setHandoff(false);
+    setJudge(null);
+  };
+
+  const runJudge = async (t1: Item[], t2: Item[]) => {
+    judgeAbort.current?.abort();
+    const ctrl = new AbortController();
+    judgeAbort.current = ctrl;
+    setJudge({ team2: t2, state: { status: "loading" } });
+    const r = await judgeTeams(board, settings.budget, t1, t2, ctrl.signal);
+    if (ctrl.signal.aborted) return;
+    setJudge({ team2: t2, state: r.ok ? { status: "done", judgement: r.data } : { status: "error", message: r.message } });
+  };
+
+  const lockIn = () => {
+    if (turn === 1) {
+      setTeam1(picks);
+      setPicks([]);
+      setHandoff(true);
+    } else if (team1) {
+      runJudge(team1, picks);
+    }
+  };
   const closeCredits = useCallback(() => setCreditsOpen(false), []);
 
   const onTap = (item: Item) => {
@@ -85,7 +122,7 @@ export default function Game() {
 
   const switchBoard = (b: Board) => {
     if (b.id === board.id) return;
-    if (picks.length) setPendingBoard(b);
+    if (picks.length || team1) setPendingBoard(b);
     else setBoard(b);
   };
 
@@ -133,6 +170,7 @@ export default function Game() {
           </button>
         </div>
         <h1 className="headline">
+          {twoPlayer && <span className="turn-tag">Player {turn}</span>}
           Build a {board.noun} with ${settings.budget}
         </h1>
         <p className="edition">
@@ -194,7 +232,12 @@ export default function Game() {
             <div className="teambar-status">
               {complete ? "Team complete" : `${picks.length} of ${TEAM_SIZE} picked`}
             </div>
-            {complete && settings.players === 1 && (
+            {complete && twoPlayer && (
+              <button className="btn primary small" onClick={lockIn}>
+                {turn === 1 ? "Lock in" : "Lock in and judge"}
+              </button>
+            )}
+            {complete && !twoPlayer && (
               <button className="btn primary small" onClick={openGrade}>
                 {currentGrade?.status === "done" ? "See grade" : "Grade my team"}
               </button>
@@ -210,10 +253,10 @@ export default function Game() {
         <SettingsModal
           board={board}
           settings={settings}
-          hasPicks={picks.length > 0}
+          hasPicks={picks.length > 0 || team1 !== null}
           onClose={closeSettings}
           onSave={(s) => {
-            if (s.budget !== settings.budget || s.rule !== settings.rule) setPicks([]);
+            if (s.budget !== settings.budget || s.rule !== settings.rule || s.players !== settings.players) resetRound();
             setSettings(s);
             setSettingsOpen(false);
           }}
@@ -222,12 +265,12 @@ export default function Game() {
 
       {makeOpen && (
         <MakeBoardModal
-          hasPicks={picks.length > 0}
+          hasPicks={picks.length > 0 || team1 !== null}
           onClose={() => setMakeOpen(false)}
           onBoard={(b) => {
             setCustomBoard(b);
             setBoard(b);
-            setPicks([]);
+            resetRound();
             setMakeOpen(false);
           }}
         />
@@ -236,6 +279,31 @@ export default function Game() {
       {creditsOpen && <CreditsModal board={board} onClose={closeCredits} />}
 
       {gradeOpen && currentGrade && <GradeModal state={currentGrade} onRetry={runGrade} onClose={closeGrade} />}
+
+      {handoff && (
+        <div className="modal-backdrop handoff">
+          <div className="modal small" role="dialog" aria-modal="true" aria-labelledby="handoff-title">
+            <h2 id="handoff-title">Pass to Player 2</h2>
+            <p>Player 1&apos;s {board.noun} is locked in and hidden. Same board, same ${settings.budget}.</p>
+            <div className="modal-actions">
+              <button className="btn primary" autoFocus onClick={() => setHandoff(false)}>
+                I&apos;m Player 2, start
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {judge && team1 && (
+        <JudgeModal
+          state={judge.state}
+          team1={team1}
+          team2={judge.team2}
+          textOnly={board.source === "generated"}
+          onRetry={() => runJudge(team1, judge.team2)}
+          onPlayAgain={resetRound}
+        />
+      )}
 
       {pendingBoard && (
         <div className="modal-backdrop" onClick={() => setPendingBoard(null)}>
@@ -250,7 +318,7 @@ export default function Game() {
                 className="btn primary"
                 onClick={() => {
                   setBoard(pendingBoard);
-                  setPicks([]);
+                  resetRound();
                   setPendingBoard(null);
                 }}
               >

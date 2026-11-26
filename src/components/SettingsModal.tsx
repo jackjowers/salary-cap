@@ -28,7 +28,7 @@ export default function SettingsModal({ board, settings, hasPicks, onSave, onClo
   const budgetValid = Number.isInteger(budgetNum) && budgetNum >= BUDGET_MIN && budgetNum <= BUDGET_MAX;
   const next = { ...draft, budget: budgetValid ? budgetNum : draft.budget };
   const problem = budgetValid ? boardProblem(board, next) : null;
-  const clearsPicks = next.budget !== settings.budget || next.rule !== settings.rule;
+  const clearsPicks = next.budget !== settings.budget || next.rule !== settings.rule || next.players !== settings.players;
   const canSave = budgetValid && !problem;
 
   return (
@@ -47,6 +47,28 @@ export default function SettingsModal({ board, settings, hasPicks, onSave, onClo
             ✕
           </button>
         </div>
+
+        <fieldset className="field">
+          <legend className="field-label">Players</legend>
+          <div className="segmented">
+            {([1, 2] as const).map((n) => (
+              <label key={n} className={draft.players === n ? "on" : ""}>
+                <input
+                  type="radio"
+                  name="players"
+                  checked={draft.players === n}
+                  onChange={() => setDraft({ ...draft, players: n })}
+                />
+                {n === 1 ? "1 player" : "2 players"}
+              </label>
+            ))}
+          </div>
+          <small className="field-hint">
+            {draft.players === 1
+              ? "Build a team and have Claude grade it."
+              : "Take turns on one screen. Player 1's picks stay hidden, then Claude picks a winner."}
+          </small>
+        </fieldset>
 
         <label className="field">
           <span className="field-label">Budget</span>
@@ -96,6 +118,7 @@ export default function SettingsModal({ board, settings, hasPicks, onSave, onClo
           </label>
         </fieldset>
 
+        {draft.players === 1 && (
         <fieldset className="field">
           <legend className="field-label">AI analysis</legend>
           <label className="radio">
@@ -110,6 +133,7 @@ export default function SettingsModal({ board, settings, hasPicks, onSave, onClo
             </span>
           </label>
         </fieldset>
+        )}
 
         {problem && <p className="field-error">{problem}</p>}
         {clearsPicks && hasPicks && canSave && <p className="modal-note">Saving clears your current picks.</p>}
