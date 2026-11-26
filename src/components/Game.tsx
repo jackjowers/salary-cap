@@ -5,7 +5,9 @@ import { PRESET_BOARDS, itemsAt, tiersOf } from "@/lib/boards";
 import { isComplete, spent, togglePick } from "@/lib/rules";
 import { DEFAULT_SETTINGS, TEAM_SIZE, type Board, type Item, type Settings } from "@/lib/types";
 import { gradeTeam, judgeTeams } from "@/lib/api-client";
+import { addEntry, baseFor, loadSaved, removeEntry, storeSaved, type SavedEntry } from "@/lib/saved-teams";
 import CreditsModal from "./CreditsModal";
+import MyTeamsModal from "./MyTeamsModal";
 import GradeModal, { type GradeState } from "./GradeModal";
 import JudgeModal, { type JudgeState } from "./JudgeModal";
 import ItemImage from "./ItemImage";
@@ -30,12 +32,20 @@ export default function Game() {
   const [handoff, setHandoff] = useState(false);
   const [judge, setJudge] = useState<{ team2: Item[]; state: JudgeState } | null>(null);
   const judgeAbort = useRef<AbortController | null>(null);
+  const [saved, setSaved] = useState<SavedEntry[]>([]);
+  const [myTeamsOpen, setMyTeamsOpen] = useState(false);
+  const [savedKeys, setSavedKeys] = useState<Record<string, string>>({});
+  const [toast, setToast] = useState<string | null>(null);
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  useEffect(() => setSaved(loadSaved()), []);
   const noticeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const gradeAbort = useRef<AbortController | null>(null);
 
   useEffect(
     () => () => {
       clearTimeout(noticeTimer.current);
+      clearTimeout(toastTimer.current);
       gradeAbort.current?.abort();
       judgeAbort.current?.abort();
     },
@@ -75,6 +85,57 @@ export default function Game() {
   }, [complete, settings.players, settings.autoGrade, teamKey, runGrade]);
 
   const closeGrade = useCallback(() => setGradeOpen(false), []);
+
+  const showToast = (text: string) => {
+    clearTimeout(toastTimer.current);
+    setToast(text);
+    toastTimer.current = setTimeout(() => setToast(null), 2600);
+  };
+
+  const persist = (update: (list: SavedEntry[]) => SavedEntry[]) => {
+    setSaved((prev) => {
+      const next = update(prev);
+      if (!storeSaved(next)) showToast("Couldn't save. Your browser is blocking storage.");
+      return next;
+    });
+  };
+
+  const saveTeam = () => {
+    const entry: SavedEntry = {
+      ...baseFor(board, settings.budget, settings.rule),
+      kind: "team",
+      picks,
+      grade: currentGrade?.status === "done" ? currentGrade.grade : undefined,
+    };
+    persist((list) => addEntry(list, entry));
+    setSavedKeys((k) => ({ ...k, [teamKey]: entry.id }));
+    showToast("Saved to My teams");
+  };
+
+  useEffect(() => {
+    if (grade?.state.status !== "done") return;
+    const id = savedKeys[grade.key];
+    if (!id) return;
+    const g = grade.state.grade;
+    persist((list) => list.map((e) => (e.id === id && e.kind === "team" && !e.grade ? { ...e, grade: g } : e)));
+  }, [grade]);
+
+  const matchupKey = judge && team1 ? `m|${teamKey}|${team1.map((p) => p.id).sort().join(",")}` : "";
+
+  const saveMatchup = () => {
+    if (!judge || !team1) return;
+    const entry: SavedEntry = {
+      ...baseFor(board, settings.budget, settings.rule),
+      kind: "matchup",
+      team1,
+      team2: judge.team2,
+      judgement: judge.state.status === "done" ? judge.state.judgement : undefined,
+    };
+    persist((list) => addEntry(list, entry));
+    setSavedKeys((k) => ({ ...k, [matchupKey]: entry.id }));
+  };
+
+  const closeMyTeams = useCallback(() => setMyTeamsOpen(false), []);
 
   const twoPlayer = settings.players === 2;
   const turn: 1 | 2 = twoPlayer && team1 ? 2 : 1;
@@ -159,6 +220,10 @@ export default function Game() {
               + Make your own
             </button>
           </div>
+          <div className="masthead-actions">
+          <button className="chip" onClick={() => setMyTeamsOpen(true)}>
+            My teams{saved.length ? ` (${saved.length})` : ""}
+          </button>
           <button className="icon-btn gear" onClick={() => setSettingsOpen(true)} aria-label="Settings">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
               <path
@@ -168,6 +233,7 @@ export default function Game() {
               />
             </svg>
           </button>
+          </div>
         </div>
         <h1 className="headline">
           {twoPlayer && <span className="turn-tag">Player {turn}</span>}
@@ -238,6 +304,11 @@ export default function Game() {
               </button>
             )}
             {complete && !twoPlayer && (
+              <button className="btn ghost small" onClick={saveTeam} disabled={Boolean(savedKeys[teamKey])}>
+                {savedKeys[teamKey] ? "Saved" : "Save"}
+              </button>
+            )}
+            {complete && !twoPlayer && (
               <button className="btn primary small" onClick={openGrade}>
                 {currentGrade?.status === "done" ? "See grade" : "Grade my team"}
               </button>
@@ -276,6 +347,28 @@ export default function Game() {
         />
       )}
 
+      {toast && (
+        <div className="toast" role="status">
+          {toast}
+        </div>
+      )}
+
+      {myTeamsOpen && (
+        <MyTeamsModal
+          entries={saved}
+          onClose={closeMyTeams}
+          onDelete={(id) => persist((list) => removeEntry(list, id))}
+          onOpenBoard={(b) => {
+            setMyTeamsOpen(false);
+            setCustomBoard(b);
+            if (b.id !== board.id || picks.length || team1) {
+              setBoard(b);
+              resetRound();
+            }
+          }}
+        />
+      )}
+
       {creditsOpen && <CreditsModal board={board} onClose={closeCredits} />}
 
       {gradeOpen && currentGrade && <GradeModal state={currentGrade} onRetry={runGrade} onClose={closeGrade} />}
@@ -302,6 +395,8 @@ export default function Game() {
           textOnly={board.source === "generated"}
           onRetry={() => runJudge(team1, judge.team2)}
           onPlayAgain={resetRound}
+          onSave={saveMatchup}
+          saved={Boolean(savedKeys[matchupKey])}
         />
       )}
 
