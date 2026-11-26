@@ -561,3 +561,127 @@ input:focus-visible {
     transition: none !important;
   }
 }
+
+/* Make your own and grading */
+.chip.make {
+  border-style: dashed;
+}
+
+.text-board .tile {
+  display: grid;
+  place-items: center;
+  padding: 6px;
+}
+
+.tile-text {
+  font-family: var(--display);
+  color: var(--paper);
+  font-size: clamp(10px, 2.4vw, 20px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.text-board .cell-name {
+  display: none;
+}
+
+.text-input {
+  font: inherit;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+}
+
+.example-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.loading-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.grade-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.grade-letter {
+  font-family: var(--display);
+  font-size: 64px;
+  line-height: 1;
+  background: var(--ink);
+  color: var(--paper);
+  min-width: 88px;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.grade-headline {
+  font-family: var(--display);
+  font-size: 22px;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.grade-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0;
+}
+
+.grade-facts div {
+  border-top: 3px solid var(--ink);
+  padding-top: 6px;
+}
+
+.grade-facts dt {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+
+.grade-facts dd {
+  margin: 2px 0 0;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2.4s;
+  }
+}

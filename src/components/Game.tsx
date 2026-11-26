@@ -4,7 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { PRESET_BOARDS, itemsAt, tiersOf } from "@/lib/boards";
 import { isComplete, spent, togglePick } from "@/lib/rules";
 import { DEFAULT_SETTINGS, TEAM_SIZE, type Board, type Item, type Settings } from "@/lib/types";
+import { gradeTeam } from "@/lib/api-client";
+import GradeModal, { type GradeState } from "./GradeModal";
 import ItemImage from "./ItemImage";
+import MakeBoardModal from "./MakeBoardModal";
 import SettingsModal from "./SettingsModal";
 
 type Notice = { itemId: string; text: string; key: number };
@@ -16,13 +19,54 @@ export default function Game() {
   const [notice, setNotice] = useState<Notice | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [pendingBoard, setPendingBoard] = useState<Board | null>(null);
+  const [customBoard, setCustomBoard] = useState<Board | null>(null);
+  const [makeOpen, setMakeOpen] = useState(false);
+  const [grade, setGrade] = useState<{ key: string; state: GradeState } | null>(null);
+  const [gradeOpen, setGradeOpen] = useState(false);
   const noticeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const gradeAbort = useRef<AbortController | null>(null);
 
-  useEffect(() => () => clearTimeout(noticeTimer.current), []);
+  useEffect(
+    () => () => {
+      clearTimeout(noticeTimer.current);
+      gradeAbort.current?.abort();
+    },
+    [],
+  );
 
   const left = settings.budget - spent(picks);
   const complete = isComplete(settings, picks);
   const tiers = tiersOf(board);
+  const teamKey = `${board.id}|${settings.budget}|${picks.map((p) => p.id).sort().join(",")}`;
+  const currentGrade = grade?.key === teamKey ? grade.state : null;
+  const boardTabs = customBoard ? [...PRESET_BOARDS, customBoard] : PRESET_BOARDS;
+
+  const runGrade = useCallback(async () => {
+    gradeAbort.current?.abort();
+    const ctrl = new AbortController();
+    gradeAbort.current = ctrl;
+    const key = teamKey;
+    setGrade({ key, state: { status: "loading" } });
+    setGradeOpen(true);
+    const r = await gradeTeam(board, settings.budget, picks, ctrl.signal);
+    if (ctrl.signal.aborted) return;
+    setGrade({ key, state: r.ok ? { status: "done", grade: r.data } : { status: "error", message: r.message } });
+  }, [board, settings.budget, picks, teamKey]);
+
+  const openGrade = () => {
+    if (currentGrade && currentGrade.status !== "error") setGradeOpen(true);
+    else runGrade();
+  };
+
+  const autoGradedKey = useRef<string | null>(null);
+  useEffect(() => {
+    if (!complete || settings.players !== 1 || !settings.autoGrade) return;
+    if (autoGradedKey.current === teamKey) return;
+    autoGradedKey.current = teamKey;
+    runGrade();
+  }, [complete, settings.players, settings.autoGrade, teamKey, runGrade]);
+
+  const closeGrade = useCallback(() => setGradeOpen(false), []);
 
   const onTap = (item: Item) => {
     const result = togglePick(settings, picks, item);
@@ -60,7 +104,7 @@ export default function Game() {
       <header className="masthead">
         <div className="masthead-row">
           <div className="board-tabs" role="tablist" aria-label="Choose a board">
-            {PRESET_BOARDS.map((b) => (
+            {boardTabs.map((b) => (
               <button
                 key={b.id}
                 role="tab"
@@ -71,6 +115,9 @@ export default function Game() {
                 {b.title}
               </button>
             ))}
+            <button className="chip make" onClick={() => setMakeOpen(true)}>
+              + Make your own
+            </button>
           </div>
           <button className="icon-btn gear" onClick={() => setSettingsOpen(true)} aria-label="Settings">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
@@ -92,7 +139,7 @@ export default function Game() {
 
       <main className="board-wrap">
         <div
-          className="board"
+          className={`board ${board.source === "generated" ? "text-board" : ""}`}
           style={{ gridTemplateColumns: `var(--price-col) repeat(${board.columns.length}, minmax(0, 1fr))` }}
         >
           <div className="corner" />
@@ -137,6 +184,11 @@ export default function Game() {
             <div className="teambar-status">
               {complete ? "Team complete" : `${picks.length} of ${TEAM_SIZE} picked`}
             </div>
+            {complete && settings.players === 1 && (
+              <button className="btn primary small" onClick={openGrade}>
+                {currentGrade?.status === "done" ? "See grade" : "Grade my team"}
+              </button>
+            )}
             <button className="btn ghost small" onClick={() => setPicks([])} disabled={!picks.length}>
               Clear
             </button>
@@ -151,12 +203,27 @@ export default function Game() {
           hasPicks={picks.length > 0}
           onClose={closeSettings}
           onSave={(s) => {
-            if (JSON.stringify(s) !== JSON.stringify(settings)) setPicks([]);
+            if (s.budget !== settings.budget || s.rule !== settings.rule) setPicks([]);
             setSettings(s);
             setSettingsOpen(false);
           }}
         />
       )}
+
+      {makeOpen && (
+        <MakeBoardModal
+          hasPicks={picks.length > 0}
+          onClose={() => setMakeOpen(false)}
+          onBoard={(b) => {
+            setCustomBoard(b);
+            setBoard(b);
+            setPicks([]);
+            setMakeOpen(false);
+          }}
+        />
+      )}
+
+      {gradeOpen && currentGrade && <GradeModal state={currentGrade} onRetry={runGrade} onClose={closeGrade} />}
 
       {pendingBoard && (
         <div className="modal-backdrop" onClick={() => setPendingBoard(null)}>
@@ -213,7 +280,11 @@ function Row({ price, board, picks, notice, blockedReason, onTap }: RowProps) {
             aria-label={`${item.name}, ${col.label}, $${item.price}`}
           >
             <span className="tile">
-              <ItemImage name={item.name} src={item.image} />
+              {board.source === "generated" ? (
+                <span className="tile-text">{item.name}</span>
+              ) : (
+                <ItemImage name={item.name} src={item.image} />
+              )}
               {picked && <span className="check">✓</span>}
             </span>
             <span className="cell-name">{item.name}</span>
