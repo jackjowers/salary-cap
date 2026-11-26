@@ -290,7 +290,7 @@ export default function Game() {
               ),
             )}
           </div>
-          <div className="teambar-meta">
+          <div className={`teambar-meta ${complete ? "complete" : ""}`}>
             <div className={`money ${left === 0 ? "zero" : ""}`}>
               <span className="money-num">${left}</span>
               <span className="money-label">left</span>
@@ -300,7 +300,14 @@ export default function Game() {
             </div>
             {complete && twoPlayer && (
               <button className="btn primary small" onClick={lockIn}>
-                {turn === 1 ? "Lock in" : "Lock in and judge"}
+                {turn === 1 ? (
+                  "Lock in"
+                ) : (
+                  <>
+                    <span className="wide-only">Lock in and judge</span>
+                    <span className="narrow-only">Judge</span>
+                  </>
+                )}
               </button>
             )}
             {complete && !twoPlayer && (
@@ -310,7 +317,13 @@ export default function Game() {
             )}
             {complete && !twoPlayer && (
               <button className="btn primary small" onClick={openGrade}>
-                {currentGrade?.status === "done" ? "See grade" : "Grade my team"}
+                {currentGrade?.status === "done" ? (
+                  "See grade"
+                ) : (
+                  <>
+                    Grade<span className="wide-only"> my team</span>
+                  </>
+                )}
               </button>
             )}
             <button className="btn ghost small" onClick={() => setPicks([])} disabled={!picks.length}>

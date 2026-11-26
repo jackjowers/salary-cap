@@ -1004,3 +1004,29 @@ input:focus-visible {
     flex: none;
   }
 }
+
+.btn {
+  white-space: nowrap;
+}
+
+.narrow-only {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .wide-only {
+    display: none;
+  }
+  .narrow-only {
+    display: inline;
+  }
+  .teambar-meta {
+    gap: 8px;
+  }
+  .teambar-meta.complete .teambar-status {
+    display: none;
+  }
+  .teambar-meta .money {
+    margin-right: auto;
+  }
+}
