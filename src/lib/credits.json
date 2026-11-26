@@ -1,0 +1,527 @@
+{
+  "nba-shai-gilgeous-alexander": {
+    "name": "Shai Gilgeous-Alexander",
+    "artist": "Sandro Halank",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:2023-08-09_Deutschland_gegen_Kanada_(Basketball-L%C3%A4nderspiel)_by_Sandro_Halank%E2%80%93109.jpg"
+  },
+  "nba-anthony-edwards": {
+    "name": "Anthony Edwards",
+    "artist": "Bryan Berlin",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Anthony_Edwards_Argentina_v_Egypt_7_July_2026-069_(cropped).jpg"
+  },
+  "nba-jayson-tatum": {
+    "name": "Jayson Tatum",
+    "artist": "Hameltion",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Celtics_at_Wizards_2024-12-044_(cropped_2).jpg"
+  },
+  "nba-giannis-antetokounmpo": {
+    "name": "Giannis Antetokounmpo",
+    "artist": "Erik Drost",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Giannis_Antetokounmpo_(51915153421)_(cropped).jpg"
+  },
+  "nba-nikola-jokic": {
+    "name": "Nikola Jokic",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Nikola_Jokic_free_throw_(cropped).jpg"
+  },
+  "nba-luka-doncic": {
+    "name": "Luka Doncic",
+    "artist": "U.S. Embassy Ljubljana",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Luka_Don%C4%8Di%C4%87_and_Marines,_2026_(cropped).jpg"
+  },
+  "nba-donovan-mitchell": {
+    "name": "Donovan Mitchell",
+    "artist": "Erik Drost",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Donovan_Mitchell_Pregame.jpg"
+  },
+  "nba-lebron-james": {
+    "name": "LeBron James",
+    "artist": "Erik Drost",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:LeBron_James_(51959977144)_(cropped2).jpg"
+  },
+  "nba-evan-mobley": {
+    "name": "Evan Mobley",
+    "artist": "Erik Drost",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Evan_Mobley_(cropped).jpg"
+  },
+  "nba-victor-wembanyama": {
+    "name": "Victor Wembanyama",
+    "artist": "Frenchieinportland",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Victor_Wembanyama_San_Antonio_Spurs_2024.jpg"
+  },
+  "nba-stephen-curry": {
+    "name": "Stephen Curry",
+    "artist": "Clément Bardot",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Stephen_Curry,_Olympic_Games_2024_(cropped).jpg"
+  },
+  "nba-devin-booker": {
+    "name": "Devin Booker",
+    "artist": "Clément Bardot",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Devin_Booker,_Olympic_Games_2024_(cropped).jpg"
+  },
+  "nba-kevin-durant": {
+    "name": "Kevin Durant",
+    "artist": "Clément Bardot",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kevin_Durant,_Paris_2024_(cropped).jpg"
+  },
+  "nba-paolo-banchero": {
+    "name": "Paolo Banchero",
+    "artist": "Al Ward",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Paolo_Banchero.png"
+  },
+  "nba-anthony-davis": {
+    "name": "Anthony Davis",
+    "artist": "Erik Drost",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Anthony_Davis_pre-game_(cropped).jpg"
+  },
+  "nba-jalen-brunson": {
+    "name": "Jalen Brunson",
+    "artist": "Erik Drost",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jalen_Brunson_2023_(cropped).jpg"
+  },
+  "nba-jalen-williams": {
+    "name": "Jalen Williams",
+    "artist": "Daiei Onoguchi",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jalen_Williams_OKCThunder_2025_NBA_Cup_(cropped)_(cropped).jpg"
+  },
+  "nba-jaylen-brown": {
+    "name": "Jaylen Brown",
+    "artist": "Hameltion",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Celtics_at_Wizards_2024-12-015_(cropped)_(cropped).jpg"
+  },
+  "nba-jaren-jackson-jr": {
+    "name": "Jaren Jackson Jr.",
+    "artist": "Erik Drost",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jaren_Jackson_(51814052094)_(cropped).jpg"
+  },
+  "nba-alperen-sengun": {
+    "name": "Alperen Sengun",
+    "artist": "Zafer",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Alperen_%C5%9Eeng%C3%BCn_23_T%C3%BCrkiye_20250823_(12).jpg"
+  },
+  "nba-cade-cunningham": {
+    "name": "Cade Cunningham",
+    "artist": "Chensiyuan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:1_cade_cunningham_2024.jpg"
+  },
+  "nba-tyler-herro": {
+    "name": "Tyler Herro",
+    "artist": "Thomas Savoja",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tyler_Herro_(cropped).jpg"
+  },
+  "nba-kawhi-leonard": {
+    "name": "Kawhi Leonard",
+    "artist": "U.S. Marine Corps photo by Lance Cpl. Mhecaela J. Watts",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Kawhi_Leonard_(7440607)_(cropped).jpg"
+  },
+  "nba-scottie-barnes": {
+    "name": "Scottie Barnes",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Scottie_Barnes,_Wizards_vs_Raptors_on_October_12,_2021.jpg"
+  },
+  "nba-chet-holmgren": {
+    "name": "Chet Holmgren",
+    "artist": "Steve Cheng, Bruin Report Online",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Chet_Holmgren.jpg"
+  },
+  "nfl-josh-allen": {
+    "name": "Josh Allen",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Josh_Allen_SEPT2021_(cropped2).jpg"
+  },
+  "nfl-saquon-barkley": {
+    "name": "Saquon Barkley",
+    "artist": "PistonsFan2223",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Saquon_Barkley_112024_(cropped_new).jpg"
+  },
+  "nfl-ja-marr-chase": {
+    "name": "Ja'Marr Chase",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Ja%27Marr_Chase.jpg"
+  },
+  "nfl-trey-mcbride": {
+    "name": "Trey McBride",
+    "artist": "FanDuel",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:2024_FanDuel_Interview_Trey_McBride_(cropped).png"
+  },
+  "nfl-myles-garrett": {
+    "name": "Myles Garrett",
+    "artist": "WOH3030",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Myles_Garrett_2026.jpg"
+  },
+  "nfl-patrick-mahomes": {
+    "name": "Patrick Mahomes",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Patrick_Mahomes_(51615475056).jpg"
+  },
+  "nfl-jahmyr-gibbs": {
+    "name": "Jahmyr Gibbs",
+    "artist": "Ck18102006",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:JahmyrGibbs_(cropped).jpg"
+  },
+  "nfl-justin-jefferson": {
+    "name": "Justin Jefferson",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jefferson_2022.jpg"
+  },
+  "nfl-brock-bowers": {
+    "name": "Brock Bowers",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Brock_Bowers_(2025).jpg"
+  },
+  "nfl-micah-parsons": {
+    "name": "Micah Parsons",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:2025_Commanders_at_Packers_Micah_Parsons_(cropped).jpg"
+  },
+  "nfl-lamar-jackson": {
+    "name": "Lamar Jackson",
+    "artist": "Maryland GovPics",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:149th_Preakness_(53731145142)_(cropped).jpg"
+  },
+  "nfl-bijan-robinson": {
+    "name": "Bijan Robinson",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bijan_Robinson_2025.jpg"
+  },
+  "nfl-puka-nacua": {
+    "name": "Puka Nacua",
+    "artist": "FanDuel",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Puka_Nacua_FanDuel_Interview_(cropped).png"
+  },
+  "nfl-george-kittle": {
+    "name": "George Kittle",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:George_Kittle_DSC08082_(48940368597)_(cropped).jpg"
+  },
+  "nfl-t-j-watt": {
+    "name": "T. J. Watt",
+    "artist": "Erik Drost",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:T.J._Watt_(51653079007)_Cropped.jpg"
+  },
+  "nfl-joe-burrow": {
+    "name": "Joe Burrow",
+    "artist": "Lordstown Motors",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Joe_Burrow_-_Lordstown_interview_-_1_(cropped).png"
+  },
+  "nfl-derrick-henry": {
+    "name": "Derrick Henry",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Derrick_Henry_OCT2022_(cropped).jpg"
+  },
+  "nfl-ceedee-lamb": {
+    "name": "CeeDee Lamb",
+    "artist": "Gage Skidmore",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:CeeDee_Lamb_by_Gage_Skidmore_(cropped).jpg"
+  },
+  "nfl-travis-kelce": {
+    "name": "Travis Kelce",
+    "artist": "Adam Schultz",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Travis_Kelce_in_the_Oval_Office_of_the_White_House_on_June_5,_2023_-_P20230605AS-0902_(cropped).jpg"
+  },
+  "nfl-aidan-hutchinson": {
+    "name": "Aidan Hutchinson",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Aidan_Hutchinson.jpg"
+  },
+  "nfl-jayden-daniels": {
+    "name": "Jayden Daniels",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jayden_Daniels_2025.jpg"
+  },
+  "nfl-christian-mccaffrey": {
+    "name": "Christian McCaffrey",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Christian_McCaffrey_2019.jpg"
+  },
+  "nfl-amon-ra-st-brown": {
+    "name": "Amon-Ra St. Brown",
+    "artist": "FanDuel",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Amon-Ra_St._Brown_FanDuel_Interview.png"
+  },
+  "nfl-sam-laporta": {
+    "name": "Sam LaPorta",
+    "artist": "Maize & Blue Nation",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:SamLaPorta.jpg"
+  },
+  "nfl-nick-bosa": {
+    "name": "Nick Bosa",
+    "artist": "All-Pro Reels",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Nick_Bosa_vs_Redskins_2019.jpg"
+  },
+  "fastfood-in-n-out-burger": {
+    "name": "In-N-Out Burger",
+    "artist": "In-N-Out Burger",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:InNOut_2021_logo.svg"
+  },
+  "fastfood-chick-fil-a": {
+    "name": "Chick-fil-A",
+    "artist": "Harrison Keely",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Chick-fil-A_fast_food_chain_restaurant_exterior_in_Cleveland,_Tennessee_05.jpg"
+  },
+  "fastfood-chipotle": {
+    "name": "Chipotle",
+    "artist": "The Bushranger",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Chipotle,_Lecanto,_Florida.jpg"
+  },
+  "fastfood-domino-s": {
+    "name": "Domino's",
+    "artist": "MultiEditor03",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Domino%E2%80%99s_Pizza_World_Resource_Center_in_Ann_Arbor,_Michigan_2026.jpg"
+  },
+  "fastfood-jersey-mike-s": {
+    "name": "Jersey Mike's",
+    "artist": "Jersey Mike's Subs",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Jersey_Mike%27s_logo.svg"
+  },
+  "fastfood-five-guys": {
+    "name": "Five Guys",
+    "artist": "Michael Rivera",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Five_Guys,_Merritt_Island.JPG"
+  },
+  "fastfood-raising-cane-s": {
+    "name": "Raising Cane's",
+    "artist": "Raising Cane's Chicken Fingers",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Raising_Cane%27s_Chicken_Fingers_logo.svg"
+  },
+  "fastfood-taco-bell": {
+    "name": "Taco Bell",
+    "artist": "Coolcaesar",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tacobellheadquartersirvine.jpg"
+  },
+  "fastfood-pizza-hut": {
+    "name": "Pizza Hut",
+    "artist": "Yum! Brands",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Pizza_Hut_2025.svg"
+  },
+  "fastfood-jimmy-john-s": {
+    "name": "Jimmy John's",
+    "artist": "Jimmy John's",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Jimmy_John%27s_(logo).svg"
+  },
+  "fastfood-shake-shack": {
+    "name": "Shake Shack",
+    "artist": "Beyond My Ken",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Shake_Shack_Madison_Square.jpg"
+  },
+  "fastfood-popeyes": {
+    "name": "Popeyes",
+    "artist": "Phillip Pessar",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Popeyes_Louisiana_Kitchen_(51195358373).jpg"
+  },
+  "fastfood-qdoba": {
+    "name": "Qdoba",
+    "artist": "Mr. Satterly",
+    "license": "WTFPL",
+    "licenseUrl": "http://www.wtfpl.net/about/",
+    "source": "https://commons.wikimedia.org/wiki/File:Qdoba_Mexican_Eats_in_Gillette,_Wyoming.jpg"
+  },
+  "fastfood-papa-john-s": {
+    "name": "Papa John's",
+    "artist": "Miguel Alvarez",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Papa_Johns_New_HQ_in_Atlanta,_Georgia.jpg"
+  },
+  "fastfood-firehouse-subs": {
+    "name": "Firehouse Subs",
+    "artist": "Sixflashphoto",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Firehouse_Subs_1.jpg"
+  },
+  "fastfood-mcdonald-s": {
+    "name": "McDonald's",
+    "artist": "McDonald's",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:McDonald%27s_Golden_Arches.svg"
+  },
+  "fastfood-wingstop": {
+    "name": "Wingstop",
+    "artist": "OWaunTon",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Wingstop_Location_(Tulsa,_Oklahoma,_November_8,_2026).jpg"
+  },
+  "fastfood-moe-s-southwest-grill": {
+    "name": "Moe's Southwest Grill",
+    "artist": "Moe's Southwest Grill",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Moes_Southwest_Grill_logo.png"
+  },
+  "fastfood-little-caesars": {
+    "name": "Little Caesars",
+    "artist": "JJonahJackalope",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Little_Caesars_World_Headquarters_2.jpg"
+  },
+  "fastfood-subway": {
+    "name": "Subway",
+    "artist": "Harrison Keely",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:A_Subway_restaurant_in_a_strip_mall_in_Franklin,_North_Carolina,_United_States.jpg"
+  },
+  "fastfood-wendy-s": {
+    "name": "Wendy's",
+    "artist": "Nheyob",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Wendy%27s_flagship_restaurant_(Dublin,_Ohio).jpg"
+  },
+  "fastfood-kfc": {
+    "name": "KFC",
+    "artist": "Ktkvtsh",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kentucky_Fried_Chicken_(Tallulah,_Louisiana)_01.jpg"
+  },
+  "fastfood-del-taco": {
+    "name": "Del Taco",
+    "artist": "Harrison Keely",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:A_Del_Taco_restaurant_in_Las_Vegas,_Nevada.jpg"
+  },
+  "fastfood-marco-s-pizza": {
+    "name": "Marco's Pizza",
+    "artist": "Dwight Burdette",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Marco%27s_Pizza_Van_Buren_Township_Michigan.JPG"
+  },
+  "fastfood-potbelly": {
+    "name": "Potbelly",
+    "artist": "Bobak Ha'Eri",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:11-16-06-EPMN-potbelly.jpg"
+  }
+}
