@@ -2,7 +2,10 @@ import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import type { z } from "zod";
 
-export const MODEL = process.env.CLAUDE_MODEL || "claude-opus-5-5";
+export const MODEL = process.env.CLAUDE_MODEL || "claude-haiku-5-5";
+
+// Haiku has no server-side fallback: a model list returns 400 and "default" does nothing.
+const SERVER_FALLBACK = !MODEL.startsWith("claude-haiku");
 
 let client: Anthropic | null = null;
 function getClient(): Anthropic {
@@ -34,8 +37,7 @@ export async function askForJson<S extends z.ZodType>(
       {
       model: MODEL,
       max_tokens: opts.maxTokens,
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
+      ...(SERVER_FALLBACK ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" as const } : {}),
       output_config: { effort: opts.effort, format: betaZodOutputFormat(schema) },
       messages: [{ role: "user", content: prompt }],
       },
