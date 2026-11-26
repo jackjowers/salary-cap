@@ -5,6 +5,7 @@ import { PRESET_BOARDS, itemsAt, tiersOf } from "@/lib/boards";
 import { isComplete, spent, togglePick } from "@/lib/rules";
 import { DEFAULT_SETTINGS, TEAM_SIZE, type Board, type Item, type Settings } from "@/lib/types";
 import { gradeTeam } from "@/lib/api-client";
+import CreditsModal from "./CreditsModal";
 import GradeModal, { type GradeState } from "./GradeModal";
 import ItemImage from "./ItemImage";
 import MakeBoardModal from "./MakeBoardModal";
@@ -23,6 +24,7 @@ export default function Game() {
   const [makeOpen, setMakeOpen] = useState(false);
   const [grade, setGrade] = useState<{ key: string; state: GradeState } | null>(null);
   const [gradeOpen, setGradeOpen] = useState(false);
+  const [creditsOpen, setCreditsOpen] = useState(false);
   const noticeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const gradeAbort = useRef<AbortController | null>(null);
 
@@ -67,6 +69,7 @@ export default function Game() {
   }, [complete, settings.players, settings.autoGrade, teamKey, runGrade]);
 
   const closeGrade = useCallback(() => setGradeOpen(false), []);
+  const closeCredits = useCallback(() => setCreditsOpen(false), []);
 
   const onTap = (item: Item) => {
     const result = togglePick(settings, picks, item);
@@ -160,6 +163,13 @@ export default function Game() {
             />
           ))}
         </div>
+        {board.source === "preset" && (
+          <p className="board-foot">
+            <button className="link-btn" onClick={() => setCreditsOpen(true)}>
+              Photo credits
+            </button>
+          </p>
+        )}
       </main>
 
       <footer className="teambar" aria-live="polite">
@@ -222,6 +232,8 @@ export default function Game() {
           }}
         />
       )}
+
+      {creditsOpen && <CreditsModal board={board} onClose={closeCredits} />}
 
       {gradeOpen && currentGrade && <GradeModal state={currentGrade} onRetry={runGrade} onClose={closeGrade} />}
 
