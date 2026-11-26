@@ -28,7 +28,7 @@ export default function SettingsModal({ board, settings, hasPicks, onSave, onClo
   const budgetValid = Number.isInteger(budgetNum) && budgetNum >= BUDGET_MIN && budgetNum <= BUDGET_MAX;
   const next = { ...draft, budget: budgetValid ? budgetNum : draft.budget };
   const problem = budgetValid ? boardProblem(board, next) : null;
-  const changed = JSON.stringify(next) !== JSON.stringify(settings);
+  const clearsPicks = next.budget !== settings.budget || next.rule !== settings.rule;
   const canSave = budgetValid && !problem;
 
   return (
@@ -96,8 +96,23 @@ export default function SettingsModal({ board, settings, hasPicks, onSave, onClo
           </label>
         </fieldset>
 
+        <fieldset className="field">
+          <legend className="field-label">AI analysis</legend>
+          <label className="radio">
+            <input
+              type="checkbox"
+              checked={draft.autoGrade}
+              onChange={(e) => setDraft({ ...draft, autoGrade: e.target.checked })}
+            />
+            <span>
+              <strong>Grade my team automatically</strong>
+              <small>Claude grades your {board.noun} as soon as all {TEAM_SIZE} picks are in. Off means you tap Grade.</small>
+            </span>
+          </label>
+        </fieldset>
+
         {problem && <p className="field-error">{problem}</p>}
-        {changed && hasPicks && canSave && <p className="modal-note">Saving clears your current picks.</p>}
+        {clearsPicks && hasPicks && canSave && <p className="modal-note">Saving clears your current picks.</p>}
 
         <div className="modal-actions">
           <button className="btn ghost" onClick={onClose}>
