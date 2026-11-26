@@ -13,9 +13,11 @@ type Props = {
   textOnly: boolean;
   onRetry: () => void;
   onPlayAgain: () => void;
+  onSave: () => void;
+  saved: boolean;
 };
 
-export default function JudgeModal({ state, team1, team2, textOnly, onRetry, onPlayAgain }: Props) {
+export default function JudgeModal({ state, team1, team2, textOnly, onRetry, onPlayAgain, onSave, saved }: Props) {
   const j = state.status === "done" ? state.judgement : null;
   const sides = [
     { label: "Player 1", team: team1, score: j?.score1, reasoning: j?.reasoning1, won: j?.winner === "1" },
@@ -68,6 +70,11 @@ export default function JudgeModal({ state, team1, team2, textOnly, onRetry, onP
           {state.status === "error" && (
             <button className="btn ghost" onClick={onRetry}>
               Try again
+            </button>
+          )}
+          {state.status !== "loading" && (
+            <button className="btn ghost" onClick={onSave} disabled={saved}>
+              {saved ? "Saved" : "Save matchup"}
             </button>
           )}
           <button className="btn primary" onClick={onPlayAgain} disabled={state.status === "loading"}>
