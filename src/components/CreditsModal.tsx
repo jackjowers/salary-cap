@@ -14,7 +14,8 @@ export default function CreditsModal({ board, onClose }: { board: Board; onClose
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const rows = board.items.map((i) => CREDITS[i.id]).filter((c): c is Credit => Boolean(c));
+  const rows = board.items.map((i) => CREDITS[i.id]).filter((c): c is Credit => Boolean(c))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
