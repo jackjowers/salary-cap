@@ -1,6 +1,7 @@
 // Downloads preset board images from Wikimedia Commons, crops them to squares,
 // and writes public/images/<board>/<slug>.jpg plus src/lib/credits.json.
-// Usage: node scripts/fetch-images.mjs [--force]
+// Originals are cached in .image-cache/ so crops can be redone without downloading again.
+// Usage: node scripts/fetch-images.mjs [--force] [--only=<id>,<id>]
 import { mkdir, readFile, writeFile, access } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
@@ -9,6 +10,8 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const SIZE = 320;
 const UA = "SalaryCapGameImageFetcher/0.1 (one-off build script)";
 const force = process.argv.includes("--force");
+const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7).split(",");
+const CACHE = path.join(ROOT, ".image-cache");
 
 const slug = (s) =>
   s
@@ -43,9 +46,16 @@ async function toSquare(buf, logo) {
       .jpeg({ quality: 82, mozjpeg: true })
       .toBuffer();
   }
-  return sharp(buf)
-    .flatten({ background: "#1a1a1a" })
-    .resize(SIZE, SIZE, { fit: "cover", position: sharp.strategy.attention })
+  const { width = 0, height = 0 } = await sharp(buf).metadata();
+  let img = sharp(buf).flatten({ background: "#1a1a1a" });
+  if (height > width * 1.1) {
+    // Portraits: faces sit near the top, so take a square from just below the top edge.
+    const top = Math.round(Math.min(height * 0.04, height - width));
+    img = img.extract({ left: 0, top, width, height: width }).resize(SIZE, SIZE);
+  } else {
+    img = img.resize(SIZE, SIZE, { fit: "cover", position: sharp.strategy.attention });
+  }
+  return img
     .jpeg({ quality: 80, mozjpeg: true })
     .toBuffer();
 }
@@ -68,16 +78,21 @@ for (const [board, items] of Object.entries(sources)) {
       licenseUrl: src.licenseUrl,
       source: `https://commons.wikimedia.org/wiki/File:${src.file}`,
     };
-    if (!force && (await exists(out))) continue;
+    if (only && !only.includes(id)) continue;
+    if (!force && !only && (await exists(out))) continue;
+    let hit = false;
     try {
-      const buf = await download(`https://upload.wikimedia.org/wikipedia/commons/${src.thumb}`);
+      const cached = path.join(CACHE, `${id}.bin`);
+      hit = await exists(cached);
+      const buf = hit ? await readFile(cached) : await download(`https://upload.wikimedia.org/wikipedia/commons/${src.thumb}`);
+      if (!hit) await mkdir(CACHE, { recursive: true }).then(() => writeFile(cached, buf));
       await writeFile(out, await toSquare(buf, src.logo));
       console.log(`ok   ${id}`);
     } catch (err) {
       failures.push(`${id}: ${err.message}`);
       console.error(`FAIL ${id}: ${err.message}`);
     }
-    await sleep(3000);
+    if (!hit) await sleep(3000);
   }
 }
 
