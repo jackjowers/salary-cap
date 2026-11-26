@@ -726,3 +726,141 @@ input:focus-visible {
 .credits-list a {
   color: var(--ink-2);
 }
+
+/* Two players */
+.turn-tag {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 4px;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4px 10px;
+}
+
+.segmented {
+  display: flex;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.segmented label {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.segmented label.on {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.segmented input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segmented label:has(input:focus-visible) {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.field-hint {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.handoff {
+  background: var(--ink);
+}
+
+.judge-modal {
+  width: min(640px, 100%);
+}
+
+.judge-sides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 520px) {
+  .judge-sides {
+    grid-template-columns: 1fr;
+  }
+}
+
+.judge-side {
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.judge-side.won {
+  border-color: var(--accent);
+}
+
+.judge-side header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.judge-score {
+  font-size: 28px;
+}
+
+.judge-side.won .judge-score {
+  color: var(--accent);
+}
+
+.judge-team {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.judge-team li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.judge-thumb {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  background: var(--tile);
+  overflow: hidden;
+}
+
+.judge-thumb .tile-fallback {
+  font-size: 11px;
+}
+
+.judge-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.judge-price {
+  font-family: var(--display);
+}
+
+.judge-reason {
+  font-size: 13px;
+  margin: 8px 0 0;
+}
